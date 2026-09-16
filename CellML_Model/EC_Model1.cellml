@@ -1,0 +1,1182 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<model name="EC_ShearStress" xmlns="http://www.cellml.org/cellml/1.1#" xmlns:cellml="http://www.cellml.org/cellml/1.1#">
+    <component name="Activation_of_G_proteins">
+        <variable initial_value="0" name="G" public_interface="out" units="uM"/>
+        <variable initial_value="0.017" name="k_a" public_interface="out" units="per_sec"/>
+        <variable name="R_star" public_interface="out" units="dimensionless"/>
+        <variable initial_value="0.33" name="Gt" public_interface="out" units="uM"/>
+        <variable initial_value="0.15" name="k_d" public_interface="out" units="per_sec"/>
+        <variable name="tau" public_interface="in" units="dimensionless"/>
+        <variable initial_value="15" name="lambda" public_interface="out" units="dimensionless"/>
+        <variable initial_value="0" name="IP3" public_interface="out" units="uM"/>
+        <variable name="r_f" public_interface="out" units="per_sec"/>
+        <variable initial_value="10" name="PIP2" public_interface="out" units="uM"/>
+        <variable initial_value="0.2" name="mu1" public_interface="out" units="per_sec"/>
+        <variable initial_value="8.37" name="alpha" public_interface="out" units="per_sec"/>
+        <variable initial_value="0.002" name="K_cp" public_interface="out" units="per_uM"/>
+        <variable initial_value="0.7937" name="M_ATP" public_interface="out" units="dimensionless"/>
+        <variable initial_value="10" name="r_r" public_interface="out" units="per_sec"/>
+        <variable initial_value="10" name="PIP2_tot" public_interface="out" units="uM"/>
+        <variable name="k_PIP2_positive" public_interface="in" units="per_sec"/>
+        <variable initial_value="0.7024" name="k_PIP2_negative" public_interface="out" units="per_sec"/>
+        <variable initial_value="0.116" name="PIP3" public_interface="out" units="uM"/>
+        <variable name="time" public_interface="in" units="second"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>G</ci>
+                </apply>
+                <apply>
+                    <minus/>
+                    <apply>
+                        <times/>
+                        <ci>k_a</ci>
+                        <ci>R_star</ci>
+                        <apply>
+                            <minus/>
+                            <ci>Gt</ci>
+                            <ci>G</ci>
+                        </apply>
+                    </apply>
+                    <apply>
+                        <times/>
+                        <ci>k_d</ci>
+                        <ci>G</ci>
+                    </apply>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>R_star</ci>
+                <apply>
+                    <tanh/>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <times/>
+                            <pi/>
+                            <ci>tau</ci>
+                        </apply>
+                        <ci>lambda</ci>
+                    </apply>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>IP3</ci>
+                </apply>
+                <apply>
+                    <minus/>
+                    <apply>
+                        <times/>
+                        <ci>r_f</ci>
+                        <ci>PIP2</ci>
+                    </apply>
+                    <apply>
+                        <times/>
+                        <ci>mu1</ci>
+                        <ci>IP3</ci>
+                    </apply>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>r_f</ci>
+                <apply>
+                    <times/>
+                    <ci>alpha</ci>
+                    <ci>K_cp</ci>
+                    <ci>M_ATP</ci>
+                    <ci>G</ci>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>PIP2</ci>
+                </apply>
+                <apply>
+                    <plus/>
+                    <apply>
+                        <minus/>
+                        <apply>
+                            <plus/>
+                            <apply>
+                                <minus/>
+                                <apply>
+                                    <times/>
+                                    <apply>
+                                        <minus/>
+                                        <apply>
+                                            <plus/>
+                                            <ci>r_f</ci>
+                                            <ci>r_r</ci>
+                                        </apply>
+                                    </apply>
+                                    <ci>PIP2</ci>
+                                </apply>
+                                <apply>
+                                    <times/>
+                                    <ci>r_r</ci>
+                                    <ci>IP3</ci>
+                                </apply>
+                            </apply>
+                            <apply>
+                                <times/>
+                                <ci>r_r</ci>
+                                <ci>PIP2_tot</ci>
+                            </apply>
+                        </apply>
+                        <apply>
+                            <times/>
+                            <ci>k_PIP2_positive</ci>
+                            <ci>PIP2</ci>
+                        </apply>
+                    </apply>
+                    <apply>
+                        <times/>
+                        <ci>k_PIP2_negative</ci>
+                        <ci>PIP3</ci>
+                    </apply>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>PIP3</ci>
+                </apply>
+                <apply>
+                    <minus/>
+                    <apply>
+                        <times/>
+                        <ci>k_PIP2_positive</ci>
+                        <ci>PIP2</ci>
+                    </apply>
+                    <apply>
+                        <times/>
+                        <ci>k_PIP2_negative</ci>
+                        <ci>PIP3</ci>
+                    </apply>
+                </apply>
+            </apply>
+        </math>
+    </component>
+    <component name="Calcium_signalling">
+        <variable name="time" public_interface="in" units="second"/>
+        <variable initial_value="0.1" name="Ca_c0" public_interface="out" units="uM"/>
+        <variable initial_value="0.1" name="Ca_c1" public_interface="out" units="uM"/>
+        <variable name="Ca_c" public_interface="out" units="uM"/>
+        <variable initial_value="3.8605" name="Ca_b" public_interface="out" units="uM"/>
+        <variable initial_value="2823.7" name="Ca_s" public_interface="out" units="uM"/>
+        <variable name="q_rel" public_interface="out" units="uM_per_sec"/>
+        <variable name="q_res" public_interface="out" units="uM_per_sec"/>
+        <variable name="q_out" public_interface="out" units="uM_per_sec"/>
+        <variable name="q_in" public_interface="out" units="uM_per_sec"/>
+        <variable initial_value="1e-07" name="k_leak" public_interface="out" units="per_uM_per_sec"/>
+        <variable initial_value="3.5" name="v_r" public_interface="out" units="dimensionless"/>
+        <variable initial_value="6.64" name="k_rel" public_interface="out" units="per_sec"/>
+        <variable name="IP3" public_interface="in" units="uM"/>
+        <variable initial_value="0.2" name="k_2" public_interface="out" units="uM"/>
+        <variable initial_value="5" name="k_res" public_interface="out" units="uM_per_sec"/>
+        <variable initial_value="0.15" name="k_3" public_interface="out" units="uM"/>
+        <variable initial_value="24.7" name="k_out" public_interface="out" units="uM_per_sec"/>
+        <variable initial_value="0.32" name="k_5" public_interface="out" units="uM"/>
+        <variable name="q_MSIC" public_interface="out" units="uM_per_sec"/>
+        <variable name="q_CCE" public_interface="out" units="uM_per_sec"/>
+        <variable initial_value="17.6" name="q_max" public_interface="out" units="uM_per_sec"/>
+        <variable initial_value="2" name="N" public_interface="out" units="dimensionless"/>
+        <variable name="W" public_interface="out" units="dimensionless"/>
+        <variable name="tau" public_interface="in" units="dimensionless"/>
+        <variable initial_value="28.6" name="Z" public_interface="out" units="dimensionless"/>
+        <variable initial_value="0.14" name="W_0" public_interface="out" units="dimensionless"/>
+        <variable initial_value="8e-07" name="k_CCE" public_interface="out" units="per_sec"/>
+        <variable initial_value="2828" name="Ca_s0" public_interface="out" units="uM"/>
+        <variable initial_value="1500" name="Ca_e" public_interface="out" units="uM"/>
+        <variable name="psi" public_interface="out" units="per_uM"/>
+        <variable initial_value="0.0075" name="xi" public_interface="out" units="per_uM2"/>
+        <variable name="cGMP_EC" public_interface="in" units="uM"/>
+        <variable initial_value="100" name="k_on" public_interface="out" units="per_uM_per_sec"/>
+        <variable initial_value="300" name="k_off" public_interface="out" units="per_sec"/>
+        <variable initial_value="120" name="B_tot" public_interface="out" units="uM"/>
+        <variable name="cc" public_interface="in" units="dimensionless"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>Ca_c0</ci>
+                </apply>
+                <apply>
+                    <plus/>
+                    <apply>
+                        <minus/>
+                        <apply>
+                            <plus/>
+                            <apply>
+                                <minus/>
+                                <apply>
+                                    <minus/>
+                                    <ci>q_rel</ci>
+                                    <ci>q_res</ci>
+                                </apply>
+                                <ci>q_out</ci>
+                            </apply>
+                            <ci>q_in</ci>
+                            <apply>
+                                <times/>
+                                <ci>k_leak</ci>
+                                <apply>
+                                    <power/>
+                                    <ci>Ca_s</ci>
+                                    <cn cellml:units="dimensionless">2</cn>
+                                </apply>
+                            </apply>
+                        </apply>
+                        <apply>
+                            <times/>
+                            <ci>k_on</ci>
+                            <ci>Ca_c0</ci>
+                            <apply>
+                                <minus/>
+                                <ci>B_tot</ci>
+                                <ci>Ca_b</ci>
+                            </apply>
+                        </apply>
+                    </apply>
+                    <apply>
+                        <times/>
+                        <ci>k_off</ci>
+                        <ci>Ca_b</ci>
+                    </apply>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>Ca_c</ci>
+                <piecewise>
+                    <piece>
+                        <ci>Ca_c0</ci>
+                        <apply>
+                            <eq/>
+                            <ci>cc</ci>
+                            <cn cellml:units="dimensionless">1</cn>
+                        </apply>
+                    </piece>
+                    <otherwise>
+                        <ci>Ca_c1</ci>
+                    </otherwise>
+                </piecewise>
+            </apply>
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>Ca_s</ci>
+                </apply>
+                <apply>
+                    <times/>
+                    <apply>
+                        <minus/>
+                        <ci>v_r</ci>
+                    </apply>
+                    <apply>
+                        <plus/>
+                        <apply>
+                            <minus/>
+                            <ci>q_rel</ci>
+                            <ci>q_res</ci>
+                        </apply>
+                        <apply>
+                            <times/>
+                            <ci>k_leak</ci>
+                            <apply>
+                                <power/>
+                                <ci>Ca_s</ci>
+                                <cn cellml:units="dimensionless">2</cn>
+                            </apply>
+                        </apply>
+                    </apply>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>q_rel</ci>
+                <apply>
+                    <times/>
+                    <ci>k_rel</ci>
+                    <apply>
+                        <power/>
+                        <apply>
+                            <divide/>
+                            <ci>IP3</ci>
+                            <apply>
+                                <plus/>
+                                <ci>k_2</ci>
+                                <ci>IP3</ci>
+                            </apply>
+                        </apply>
+                        <cn cellml:units="dimensionless">3</cn>
+                    </apply>
+                    <ci>Ca_s</ci>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>q_res</ci>
+                <apply>
+                    <times/>
+                    <ci>k_res</ci>
+                    <apply>
+                        <power/>
+                        <apply>
+                            <divide/>
+                            <ci>Ca_c</ci>
+                            <apply>
+                                <plus/>
+                                <ci>k_3</ci>
+                                <ci>Ca_c</ci>
+                            </apply>
+                        </apply>
+                        <cn cellml:units="dimensionless">2</cn>
+                    </apply>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>q_out</ci>
+                <apply>
+                    <divide/>
+                    <apply>
+                        <times/>
+                        <ci>k_out</ci>
+                        <ci>Ca_c</ci>
+                    </apply>
+                    <apply>
+                        <plus/>
+                        <ci>k_5</ci>
+                        <ci>Ca_c</ci>
+                    </apply>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>q_in</ci>
+                <apply>
+                    <plus/>
+                    <ci>q_MSIC</ci>
+                    <ci>q_CCE</ci>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>q_MSIC</ci>
+                <apply>
+                    <divide/>
+                    <ci>q_max</ci>
+                    <apply>
+                        <plus/>
+                        <cn cellml:units="dimensionless">1</cn>
+                        <apply>
+                            <times/>
+                            <ci>N</ci>
+                            <apply>
+                                <exp/>
+                                <apply>
+                                    <minus/>
+                                    <ci>W</ci>
+                                </apply>
+                            </apply>
+                        </apply>
+                    </apply>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>W</ci>
+                <apply>
+                    <divide/>
+                    <apply>
+                        <times/>
+                        <ci>W_0</ci>
+                        <apply>
+                            <power/>
+                            <apply>
+                                <minus/>
+                                <apply>
+                                    <plus/>
+                                    <ci>tau</ci>
+                                    <apply>
+                                        <root/>
+                                        <apply>
+                                            <plus/>
+                                            <apply>
+                                                <times/>
+                                                <cn cellml:units="dimensionless">16</cn>
+                                                <apply>
+                                                    <power/>
+                                                    <ci>Z</ci>
+                                                    <cn cellml:units="dimensionless">2</cn>
+                                                </apply>
+                                            </apply>
+                                            <apply>
+                                                <power/>
+                                                <ci>tau</ci>
+                                                <cn cellml:units="dimensionless">2</cn>
+                                            </apply>
+                                        </apply>
+                                    </apply>
+                                </apply>
+                                <apply>
+                                    <times/>
+                                    <cn cellml:units="dimensionless">4</cn>
+                                    <ci>Z</ci>
+                                </apply>
+                            </apply>
+                            <cn cellml:units="dimensionless">2</cn>
+                        </apply>
+                    </apply>
+                    <apply>
+                        <plus/>
+                        <ci>tau</ci>
+                        <apply>
+                            <root/>
+                            <apply>
+                                <plus/>
+                                <apply>
+                                    <times/>
+                                    <cn cellml:units="dimensionless">16</cn>
+                                    <apply>
+                                        <power/>
+                                        <ci>Z</ci>
+                                        <cn cellml:units="dimensionless">2</cn>
+                                    </apply>
+                                </apply>
+                                <apply>
+                                    <power/>
+                                    <ci>tau</ci>
+                                    <cn cellml:units="dimensionless">2</cn>
+                                </apply>
+                            </apply>
+                        </apply>
+                    </apply>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>q_CCE</ci>
+                <apply>
+                    <times/>
+                    <ci>k_CCE</ci>
+                    <ci>psi</ci>
+                    <apply>
+                        <minus/>
+                        <ci>Ca_s0</ci>
+                        <ci>Ca_s</ci>
+                    </apply>
+                    <apply>
+                        <minus/>
+                        <ci>Ca_e</ci>
+                        <ci>Ca_c</ci>
+                    </apply>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>psi</ci>
+                <apply>
+                    <minus/>
+                    <cn cellml:units="per_uM">1</cn>
+                    <apply>
+                        <times/>
+                        <ci>xi</ci>
+                        <ci>cGMP_EC</ci>
+                    </apply>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>Ca_b</ci>
+                </apply>
+                <apply>
+                    <minus/>
+                    <apply>
+                        <times/>
+                        <ci>k_on</ci>
+                        <ci>Ca_c</ci>
+                        <apply>
+                            <minus/>
+                            <ci>B_tot</ci>
+                            <ci>Ca_b</ci>
+                        </apply>
+                    </apply>
+                    <apply>
+                        <times/>
+                        <ci>k_off</ci>
+                        <ci>Ca_b</ci>
+                    </apply>
+                </apply>
+            </apply>
+        </math>
+    </component>
+    <component name="Activation_of_protein_kinases">
+        <variable name="time" public_interface="in" units="second"/>
+        <variable initial_value="2.5" name="a_PI3K" public_interface="out" units="dimensionless"/>
+        <variable name="tau" public_interface="in" units="dimensionless"/>
+        <variable initial_value="24" name="delta" public_interface="out" units="dimensionless"/>
+        <variable initial_value="0.003" name="eta" public_interface="out" units="per_sec"/>
+        <variable name="k_PIP2_positive" public_interface="out" units="per_sec"/>
+        <variable initial_value="0.021" name="k_1p" public_interface="out" units="per_sec"/>
+        <variable initial_value="0.0022" name="k_2p" public_interface="out" units="per_sec"/>
+        <variable initial_value="0.0337" name="AKT_star" public_interface="out" units="uM"/>
+        <variable name="AKT" units="uM"/>
+        <variable initial_value="1" name="AKT_tot" public_interface="out" units="uM"/>
+        <variable initial_value="1" name="PKC_tot" public_interface="out" units="uM"/>
+        <variable initial_value="0.0337" name="PKC_star" public_interface="out" units="uM"/>
+        <variable name="PKC" units="uM"/>
+        <variable name="k_AKT_positive" public_interface="out" units="per_sec"/>
+        <variable name="k_PKC_positive" public_interface="out" units="per_sec"/>
+        <variable initial_value="0.1155" name="k_AKT_negative" public_interface="out" units="per_sec"/>
+        <variable initial_value="0.1155" name="k_PKC_negative" public_interface="out" units="per_sec"/>
+        <variable name="PIP3" public_interface="in" units="uM"/>
+        <variable name="PIP3_min" public_interface="out" units="uM"/>
+        <variable name="PIP3_max" public_interface="out" units="uM"/>
+        <variable name="PIP2_tot" public_interface="in" units="uM"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <ci>AKT</ci>
+                <apply>
+                    <minus/>
+                    <cn cellml:units="uM">1</cn>
+                    <ci>AKT_star</ci>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>PKC</ci>
+                <apply>
+                    <minus/>
+                    <cn cellml:units="uM">1</cn>
+                    <ci>PKC_star</ci>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>k_PIP2_positive</ci>
+                <apply>
+                    <plus/>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <times/>
+                            <ci>k_1p</ci>
+                            <apply>
+                                <plus/>
+                                <cn cellml:units="dimensionless">1</cn>
+                                <apply>
+                                    <times/>
+                                    <ci>a_PI3K</ci>
+                                    <apply>
+                                        <tanh/>
+                                        <apply>
+                                            <divide/>
+                                            <apply>
+                                                <times/>
+                                                <pi/>
+                                                <ci>tau</ci>
+                                            </apply>
+                                            <ci>delta</ci>
+                                        </apply>
+                                    </apply>
+                                    <apply>
+                                        <exp/>
+                                        <apply>
+                                            <times/>
+                                            <apply>
+                                                <minus/>
+                                                <ci>eta</ci>
+                                            </apply>
+                                            <ci>time</ci>
+                                        </apply>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                        <apply>
+                            <plus/>
+                            <cn cellml:units="dimensionless">1</cn>
+                            <ci>a_PI3K</ci>
+                        </apply>
+                    </apply>
+                    <ci>k_2p</ci>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>AKT_star</ci>
+                </apply>
+                <apply>
+                    <minus/>
+                    <apply>
+                        <times/>
+                        <ci>k_AKT_positive</ci>
+                        <ci>AKT</ci>
+                    </apply>
+                    <apply>
+                        <times/>
+                        <ci>k_AKT_negative</ci>
+                        <ci>AKT_star</ci>
+                    </apply>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>PKC_star</ci>
+                </apply>
+                <apply>
+                    <minus/>
+                    <apply>
+                        <times/>
+                        <ci>k_PKC_positive</ci>
+                        <ci>PKC</ci>
+                    </apply>
+                    <apply>
+                        <times/>
+                        <ci>k_PKC_negative</ci>
+                        <ci>PKC_star</ci>
+                    </apply>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>k_AKT_positive</ci>
+                <apply>
+                    <divide/>
+                    <apply>
+                        <times/>
+                        <cn cellml:units="dimensionless">0.1</cn>
+                        <ci>k_AKT_negative</ci>
+                        <apply>
+                            <minus/>
+                            <ci>PIP3</ci>
+                            <ci>PIP3_min</ci>
+                        </apply>
+                    </apply>
+                    <apply>
+                        <minus/>
+                        <ci>PIP3_max</ci>
+                        <ci>PIP3_min</ci>
+                    </apply>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>k_PKC_positive</ci>
+                <apply>
+                    <divide/>
+                    <apply>
+                        <times/>
+                        <cn cellml:units="dimensionless">0.1</cn>
+                        <ci>k_PKC_negative</ci>
+                        <apply>
+                            <minus/>
+                            <ci>PIP3</ci>
+                            <ci>PIP3_min</ci>
+                        </apply>
+                    </apply>
+                    <apply>
+                        <minus/>
+                        <ci>PIP3_max</ci>
+                        <ci>PIP3_min</ci>
+                    </apply>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>PIP3_min</ci>
+                <apply>
+                    <times/>
+                    <cn cellml:units="dimensionless">0.0031</cn>
+                    <ci>PIP2_tot</ci>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>PIP3_max</ci>
+                <apply>
+                    <times/>
+                    <cn cellml:units="dimensionless">0.031</cn>
+                    <ci>PIP2_tot</ci>
+                </apply>
+            </apply>
+        </math>
+    </component>
+    <component name="Phosphorylation_and_formation_of_eNOS_complexes">
+        <variable name="time" public_interface="in" units="second"/>
+        <variable name="Ca_c" public_interface="in" units="uM"/>
+        <variable initial_value="0.0002668" name="Ca4_CaM" public_interface="out" units="uM"/>
+        <variable initial_value="100" name="k_Ca4_CaM" public_interface="out" units="per_sec"/>
+        <variable initial_value="0.0045" name="theta" public_interface="out" units="dimensionless"/>
+        <variable initial_value="2.7" name="beta" public_interface="out" units="dimensionless"/>
+        <variable initial_value="30" name="CaM_tot" public_interface="out" units="uM"/>
+        <variable initial_value="1" name="k_dCaM" public_interface="out" units="dimensionless"/>
+        <variable initial_value="0.0019" name="eNOS_CaM" public_interface="out" units="uM"/>
+        <variable initial_value="0.001" name="eNOS_CaM_star" public_interface="out" units="uM"/>
+        <variable initial_value="7.5" name="k_CaM_positive" public_interface="out" units="per_sec"/>
+        <variable initial_value="0.01" name="k_CaM_negative" public_interface="out" units="per_sec"/>
+        <variable initial_value="3" name="k_half_CaM" public_interface="out" units="uM"/>
+        <variable name="eNOS_Cav" public_interface="out" units="uM"/>
+        <variable initial_value="0.04" name="eNOS_tot" public_interface="out" units="uM"/>
+        <variable name="k_eAKT_positive" public_interface="out" units="per_sec"/>
+        <variable name="k_eAKT_negative" public_interface="out" units="per_sec"/>
+        <variable initial_value="0.004" name="k_eAKT_max" public_interface="out" units="per_sec"/>
+        <variable name="AKT_star" public_interface="in" units="uM"/>
+        <variable name="AKT_tot" public_interface="in" units="uM"/>
+        <variable initial_value="0.002" name="k_Thr_positive" public_interface="out" units="per_sec"/>
+        <variable initial_value="0.0002222222" name="k_Thr_negative" public_interface="out" units="per_sec"/>
+        <variable initial_value="0.0078" name="eNOS_Cav_0" public_interface="out" units="uM"/>
+        <variable name="PKC_tot" public_interface="in" units="uM"/>
+        <variable name="PKC_star" public_interface="in" units="uM"/>
+        <variable initial_value="1" name="m_1" public_interface="out" units="per_uM"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <ci>k_eAKT_negative</ci>
+                <apply>
+                    <divide/>
+                    <ci>k_eAKT_max</ci>
+                    <cn cellml:units="dimensionless">18</cn>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>Ca4_CaM</ci>
+                </apply>
+                <apply>
+                    <times/>
+                    <ci>k_Ca4_CaM</ci>
+                    <apply>
+                        <minus/>
+                        <apply>
+                            <divide/>
+                            <apply>
+                                <times/>
+                                <ci>theta</ci>
+                                <apply>
+                                    <power/>
+                                    <apply>
+                                        <times/>
+                                        <ci>Ca_c</ci>
+                                        <ci>m_1</ci>
+                                    </apply>
+                                    <ci>beta</ci>
+                                </apply>
+                                <ci>CaM_tot</ci>
+                            </apply>
+                            <apply>
+                                <plus/>
+                                <ci>k_dCaM</ci>
+                                <apply>
+                                    <power/>
+                                    <apply>
+                                        <times/>
+                                        <ci>Ca_c</ci>
+                                        <ci>m_1</ci>
+                                    </apply>
+                                    <ci>beta</ci>
+                                </apply>
+                            </apply>
+                        </apply>
+                        <ci>Ca4_CaM</ci>
+                    </apply>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>eNOS_CaM</ci>
+                </apply>
+                <apply>
+                    <minus/>
+                    <apply>
+                        <minus/>
+                        <apply>
+                            <times/>
+                            <apply>
+                                <divide/>
+                                <apply>
+                                    <times/>
+                                    <ci>k_CaM_positive</ci>
+                                    <ci>Ca4_CaM</ci>
+                                </apply>
+                                <apply>
+                                    <plus/>
+                                    <ci>k_half_CaM</ci>
+                                    <ci>Ca4_CaM</ci>
+                                </apply>
+                            </apply>
+                            <ci>eNOS_Cav</ci>
+                        </apply>
+                        <apply>
+                            <times/>
+                            <ci>k_CaM_negative</ci>
+                            <ci>eNOS_CaM</ci>
+                        </apply>
+                    </apply>
+                    <apply>
+                        <minus/>
+                        <apply>
+                            <times/>
+                            <ci>k_eAKT_positive</ci>
+                            <ci>eNOS_CaM</ci>
+                        </apply>
+                        <apply>
+                            <times/>
+                            <ci>k_eAKT_negative</ci>
+                            <ci>eNOS_CaM_star</ci>
+                        </apply>
+                    </apply>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>eNOS_Cav</ci>
+                <apply>
+                    <minus/>
+                    <ci>eNOS_tot</ci>
+                    <apply>
+                        <plus/>
+                        <ci>eNOS_Cav_0</ci>
+                        <ci>eNOS_CaM</ci>
+                        <ci>eNOS_CaM_star</ci>
+                    </apply>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>eNOS_CaM_star</ci>
+                </apply>
+                <apply>
+                    <minus/>
+                    <apply>
+                        <times/>
+                        <ci>k_eAKT_positive</ci>
+                        <ci>eNOS_CaM</ci>
+                    </apply>
+                    <apply>
+                        <times/>
+                        <ci>k_eAKT_negative</ci>
+                        <ci>eNOS_CaM_star</ci>
+                    </apply>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>k_eAKT_positive</ci>
+                <apply>
+                    <divide/>
+                    <apply>
+                        <times/>
+                        <ci>k_eAKT_max</ci>
+                        <ci>AKT_star</ci>
+                    </apply>
+                    <ci>AKT_tot</ci>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>eNOS_Cav_0</ci>
+                </apply>
+                <apply>
+                    <minus/>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <times/>
+                            <ci>k_Thr_positive</ci>
+                            <ci>PKC_star</ci>
+                            <ci>eNOS_Cav</ci>
+                        </apply>
+                        <ci>PKC_tot</ci>
+                    </apply>
+                    <apply>
+                        <times/>
+                        <ci>k_Thr_negative</ci>
+                        <ci>eNOS_Cav_0</ci>
+                    </apply>
+                </apply>
+            </apply>
+        </math>
+    </component>
+    <component name="NO_production">
+        <variable name="time" public_interface="in" units="second"/>
+        <variable initial_value="NO_EC0" name="NO_EC" public_interface="out" units="uM"/>
+        <variable initial_value="0.0089" name="NO_EC0" public_interface="out" units="uM"/>
+        <variable initial_value="382" name="lambda_NO" public_interface="out" units="per_sec"/>
+        <variable name="Q_NO" public_interface="out" units="uM_per_sec"/>
+        <!--var O2: uM {init: 5, pub: out};-->
+        <variable initial_value="23.2" name="k_mNO" public_interface="out" units="uM"/>
+        <variable name="eNOS_CaM" public_interface="in" units="uM"/>
+        <variable name="eNOS_CaM_star" public_interface="in" units="uM"/>
+        <variable initial_value="9" name="Phi" public_interface="out" units="dimensionless"/>
+        <variable name="Q_sGC" public_interface="out" units="uM_per_sec"/>
+        <variable initial_value="0.1" name="sGC" public_interface="out" units="uM"/>
+        <variable initial_value="0.022" name="R_NO_max" public_interface="out" units="per_sec"/>
+        <variable initial_value="0.00120016" name="a_0" public_interface="out" units="uM2"/>
+        <variable initial_value="0.03733" name="a_1" public_interface="out" units="uM"/>
+        <variable initial_value="5.99" name="cGMP_EC" public_interface="out" units="uM"/>
+        <variable initial_value="1.26" name="v_cGMP_max" public_interface="out" units="uM_per_sec"/>
+        <variable initial_value="4.8e-06" name="g_0" public_interface="out" units="uM2"/>
+        <variable initial_value="0.03533" name="g_1" public_interface="out" units="uM"/>
+        <variable initial_value="0.0695" name="X" public_interface="out" units="per_sec"/>
+        <variable initial_value="2" name="k_cGMP" public_interface="out" units="uM"/>
+        <variable initial_value="300" name="r" public_interface="out" units="per_sec"/>
+        <variable initial_value="1" name="b_0" public_interface="out" units="dimensionless"/>
+        <variable initial_value="0.01515" name="b_1" public_interface="out" units="uM"/>
+        <variable name="J_dif" public_interface="in" units="uM_per_sec"/>
+        <variable name="Q_RBC" public_interface="out" units="uM_per_sec"/>
+        <variable name="NO_rate" public_interface="out" units="uM_per_sec"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <ci>Q_RBC</ci>
+                <apply>
+                    <times/>
+                    <ci>lambda_NO</ci>
+                    <ci>NO_EC</ci>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>Q_NO</ci>
+                <apply>
+                    <times/>
+                    <ci>r</ci>
+                    <apply>
+                        <plus/>
+                        <ci>eNOS_CaM</ci>
+                        <apply>
+                            <times/>
+                            <ci>Phi</ci>
+                            <ci>eNOS_CaM_star</ci>
+                        </apply>
+                    </apply>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>Q_sGC</ci>
+                <apply>
+                    <divide/>
+                    <apply>
+                        <times/>
+                        <ci>R_NO_max</ci>
+                        <ci>sGC</ci>
+                        <apply>
+                            <plus/>
+                            <apply>
+                                <times/>
+                                <ci>b_1</ci>
+                                <ci>NO_EC</ci>
+                            </apply>
+                            <apply>
+                                <times/>
+                                <ci>b_0</ci>
+                                <apply>
+                                    <power/>
+                                    <ci>NO_EC</ci>
+                                    <cn cellml:units="dimensionless">2</cn>
+                                </apply>
+                            </apply>
+                        </apply>
+                    </apply>
+                    <apply>
+                        <plus/>
+                        <ci>a_0</ci>
+                        <apply>
+                            <times/>
+                            <ci>a_1</ci>
+                            <ci>NO_EC</ci>
+                        </apply>
+                        <apply>
+                            <power/>
+                            <ci>NO_EC</ci>
+                            <cn cellml:units="dimensionless">2</cn>
+                        </apply>
+                    </apply>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>NO_EC</ci>
+                </apply>
+                <apply>
+                    <minus/>
+                    <apply>
+                        <minus/>
+                        <apply>
+                            <minus/>
+                            <ci>Q_NO</ci>
+                            <ci>Q_sGC</ci>
+                        </apply>
+                        <apply>
+                            <times/>
+                            <ci>lambda_NO</ci>
+                            <ci>NO_EC</ci>
+                        </apply>
+                    </apply>
+                    <ci>J_dif</ci>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>cGMP_EC</ci>
+                </apply>
+                <apply>
+                    <minus/>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <times/>
+                            <ci>v_cGMP_max</ci>
+                            <apply>
+                                <plus/>
+                                <ci>g_0</ci>
+                                <apply>
+                                    <times/>
+                                    <ci>g_1</ci>
+                                    <ci>NO_EC</ci>
+                                </apply>
+                                <apply>
+                                    <power/>
+                                    <ci>NO_EC</ci>
+                                    <cn cellml:units="dimensionless">2</cn>
+                                </apply>
+                            </apply>
+                        </apply>
+                        <apply>
+                            <plus/>
+                            <ci>a_0</ci>
+                            <apply>
+                                <times/>
+                                <ci>a_1</ci>
+                                <ci>NO_EC</ci>
+                            </apply>
+                            <apply>
+                                <power/>
+                                <ci>NO_EC</ci>
+                                <cn cellml:units="dimensionless">2</cn>
+                            </apply>
+                        </apply>
+                    </apply>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <times/>
+                            <ci>X</ci>
+                            <apply>
+                                <power/>
+                                <ci>cGMP_EC</ci>
+                                <cn cellml:units="dimensionless">2</cn>
+                            </apply>
+                        </apply>
+                        <apply>
+                            <plus/>
+                            <ci>k_cGMP</ci>
+                            <ci>cGMP_EC</ci>
+                        </apply>
+                    </apply>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>NO_rate</ci>
+                <apply>
+                    <minus/>
+                    <apply>
+                        <minus/>
+                        <apply>
+                            <minus/>
+                            <ci>Q_NO</ci>
+                            <ci>Q_sGC</ci>
+                        </apply>
+                        <apply>
+                            <times/>
+                            <ci>lambda_NO</ci>
+                            <ci>NO_EC</ci>
+                        </apply>
+                    </apply>
+                    <ci>J_dif</ci>
+                </apply>
+            </apply>
+        </math>
+    </component>
+</model>

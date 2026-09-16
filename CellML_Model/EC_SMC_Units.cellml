@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<model name="units" xmlns="http://www.cellml.org/cellml/1.1#" xmlns:cellml="http://www.cellml.org/cellml/1.1#">
+    <units name="ms">
+        <unit prefix="milli" units="second"/>
+    </units>
+    <units name="per_ms">
+        <unit exponent="-1" units="ms"/>
+    </units>
+    <units name="per_ms_mV">
+        <unit exponent="-1" units="ms"/>
+        <unit exponent="-1" units="mV"/>
+    </units>
+    <units name="mV">
+        <unit prefix="milli" units="volt"/>
+    </units>
+    <units name="mV_per_ms">
+        <unit units="mV"/>
+        <unit exponent="-1" units="ms"/>
+    </units>
+    <units name="cm">
+        <unit prefix="centi" units="metre"/>
+    </units>
+    <units name="uA">
+        <unit prefix="micro" units="ampere"/>
+    </units>
+    <units name="uA_per_cmsq">
+        <unit units="uA"/>
+        <unit exponent="-2" units="cm"/>
+    </units>
+    <units name="mS">
+        <unit prefix="milli" units="siemens"/>
+    </units>
+    <units name="nS">
+        <unit prefix="nano" units="siemens"/>
+    </units>
+    <units name="nS_per_uM">
+        <unit prefix="nano" units="siemens"/>
+        <unit units="per_uM"/>
+    </units>
+    <units name="uM_per_sec">
+        <unit units="uM"/>
+        <unit exponent="-1" units="second"/>
+    </units>
+    <units name="C_per_mol">
+        <unit units="second"/>
+        <unit units="ampere"/>
+        <unit exponent="-1" units="mole"/>
+    </units>
+    <units name="uM">
+        <unit prefix="micro" units="mole"/>
+        <unit exponent="-1" units="litre"/>
+    </units>
+    <units name="per_uM">
+        <unit exponent="-1" units="uM"/>
+    </units>
+    <units name="per_uM_per_sec">
+        <unit units="per_uM"/>
+        <unit exponent="-1" units="second"/>
+    </units>
+    <units name="per_sec">
+        <unit exponent="-1" units="second"/>
+    </units>
+    <units name="mS_per_cmsq">
+        <unit units="mS"/>
+        <unit exponent="-2" units="cm"/>
+    </units>
+    <units name="mJ_per_K_per_mol">
+        <unit prefix="milli" units="joule"/>
+        <unit exponent="-1" units="kelvin"/>
+        <unit exponent="-1" units="mole"/>
+    </units>
+    <units name="umetre">
+        <unit prefix="micro" units="metre"/>
+    </units>
+    <units name="uumetre2">
+        <unit exponent="2" units="umetre"/>
+    </units>
+    <units name="umetre_per_sec">
+        <unit prefix="micro" units="metre"/>
+        <unit exponent="-1" units="second"/>
+    </units>
+    <units name="uN">
+        <unit prefix="micro" units="newton"/>
+    </units>
+    <units name="uN_per_umetre">
+        <unit prefix="micro" units="newton"/>
+        <unit exponent="-1" prefix="micro" units="metre"/>
+    </units>
+    <units name="uN_sec_per_umetre">
+        <unit prefix="micro" units="newton"/>
+        <unit units="second"/>
+        <unit exponent="-1" prefix="micro" units="metre"/>
+    </units>
+    <units name="first_order_rate_constant">
+        <unit exponent="-1" units="second"/>
+    </units>
+    <units name="uP">
+        <unit prefix="micro" units="pascal"/>
+    </units>
+    <units name="uN_per_uumetre2">
+        <unit units="uN"/>
+        <unit exponent="-1" units="uumetre2"/>
+    </units>
+    <units name="M_per_cmsq">
+        <unit units="mole"/>
+        <unit exponent="-1" units="litre"/>
+        <unit exponent="-2" units="cm"/>
+    </units>
+    <units name="umol_per_cmsq">
+        <unit prefix="micro" units="mole"/>
+        <unit exponent="-2" units="cm"/>
+    </units>
+    <units name="per_Micro">
+        <unit exponent="-1" units="pascal"/>
+        <unit units="uN_per_uumetre2"/>
+    </units>
+    <units name="uM2">
+        <unit exponent="2" units="uM"/>
+    </units>
+    <units name="per_uM2">
+        <unit exponent="-1" units="uM2"/>
+    </units>
+</model>
