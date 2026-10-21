@@ -52,9 +52,9 @@
         <!--280-->
         <variable initial_value="0" name="tn0" units="dimensionless"/>
         <!-- when tn0==1,tn1 =tn2=0)  then tau is a step function of time-->
-        <variable initial_value="0" name="tn1" units="dimensionless"/>
+        <variable initial_value="1" name="tn1" units="dimensionless"/>
         <!--when tn1=1,tn2=tn0=0) then  tau==tau_c -->
-        <variable initial_value="1" name="tn2" units="dimensionless"/>
+        <variable initial_value="0" name="tn2" units="dimensionless"/>
         <!--when tn2=1,tn1=tn0=0) then (tau==tau_c for (t1_tau<time<=t4_time) , otherwise tau==tau0-->
         <variable name="time" public_interface="out" units="second"/>
         <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -242,8 +242,8 @@ var k_mlcpc: per_sec {pub: in};
 var k_mlcpm: uM {pub: in};-->
         <variable name="m" public_interface="in" units="dimensionless"/>
         <variable name="P" public_interface="in" units="dimensionless"/>
-        <variable name="p_agonist" public_interface="in" units="uM"/>
-        <variable name="P_ipr" public_interface="in" units="dimensionless"/>
+        <!--/ var p_agonist: uM {pub: in};-->
+        <!--/   var P_ipr: dimensionless {pub: in};-->
         <variable name="P_RyR" public_interface="in" units="dimensionless"/>
         <variable name="V_ca" public_interface="in" units="mV"/>
         <variable name="V" public_interface="in" units="vmV"/>
@@ -279,7 +279,7 @@ var k_mlcpm: uM {pub: in};-->
         <variable name="k_ryr3" public_interface="in" units="uM"/>
         <variable name="delta_SMC" public_interface="in" units="dimensionless"/>
         <variable name="delta2" public_interface="in" units="dimensionless"/>
-        <variable name="k_ipr" public_interface="in" units="per_sec"/>
+        <!--/  var k_ipr: per_sec {pub: in};-->
         <variable name="k_RyR" public_interface="in" units="per_sec"/>
         <variable name="Vm" public_interface="in" units="mV"/>
         <variable name="km" public_interface="in" units="mV"/>
@@ -289,7 +289,7 @@ var k_mlcpm: uM {pub: in};-->
         <variable name="T" public_interface="in" units="kelvin"/>
         <variable name="alpha0" public_interface="in" units="uM_per_sec"/>
         <variable name="alpha1" public_interface="in" units="dimensionless"/>
-        <variable name="alpha2" public_interface="in" units="per_sec"/>
+        <!--/   var alpha2: per_sec {pub: in};-->
         <variable name="Jer" public_interface="in" units="per_sec"/>
         <variable name="Ve" public_interface="in" units="uM_per_sec"/>
         <variable name="Ke" public_interface="in" units="uM"/>
@@ -330,10 +330,11 @@ var k_mlcpm: uM {pub: in};-->
         var Eb: dimensionless {pub: in};-->
         <variable name="eNOS_CaM" public_interface="in" units="uM"/>
         <variable name="eNOS_CaM_star" public_interface="in" units="uM"/>
-        <!--        var h_four: per_sec {pub: in};-->
+        <!--        var h_four: per_sec {pub: in}; -->
         <variable name="J_dif" public_interface="out" units="uM_per_sec"/>
         <!--        var J_no: uM_per_sec {pub: in};-->
-        <variable initial_value="0.1" name="k_dif" units="uM_per_sec"/>
+        <variable initial_value="0" name="k_dif" units="uM_per_sec"/>
+        <!--0.1-->
         <!--        var Km_pde: uM {pub: in};
         var K_pde: per_sec {pub: in};
         var n_mlcph: dimensionless {pub: in};-->
@@ -349,18 +350,25 @@ var k_mlcpm: uM {pub: in};-->
         <variable name="Eb" public_interface="in" units="dimensionless"/>
         <!--var Eb: dimensionless {pub: out};-->
         <variable name="E6c" public_interface="in" units="dimensionless"/>
-        <variable initial_value="0" name="E6c0" public_interface="out" units="dimensionless"/>
+        <variable initial_value="0.1292" name="E6c0" public_interface="out" units="dimensionless"/>
+        <!--0.1292132851-->
+        <!--init:0-->
         <variable name="E5c" public_interface="in" units="dimensionless"/>
-        <variable initial_value="0" name="E5c0" public_interface="out" units="dimensionless"/>
+        <variable initial_value="0.0716" name="E5c0" public_interface="out" units="dimensionless"/>
+        <!--0.0716145887-->
+        <!--init: 0-->
         <variable name="NO_SMC" public_interface="in" units="uM"/>
-        <variable initial_value="0" name="NO_SMC0" public_interface="out" units="uM"/>
+        <variable initial_value="0.0081" name="NO_SMC0" public_interface="out" units="uM"/>
+        <!--0.008094243-->
+        <!--init:0-->
         <variable initial_value="2000" name="h_one" public_interface="out" units="per_uM_per_sec"/>
         <variable initial_value="100" name="hm1" public_interface="out" units="per_sec"/>
         <variable initial_value="0.1" name="h_two" public_interface="out" units="per_sec"/>
         <variable initial_value="3" name="h_three" public_interface="out" units="per_uM_per_sec"/>
         <variable name="h_four" public_interface="in" units="per_sec"/>
         <variable name="cGMP_SMC" public_interface="in" units="uM"/>
-        <variable initial_value="0" name="cGMP_SMC0" public_interface="out" units="uM"/>
+        <variable initial_value="4.5150" name="cGMP_SMC0" public_interface="out" units="uM"/>
+        <!--4.5150429//4.52576// init:0-->
         <variable name="vd" public_interface="in" units="uM_per_sec"/>
         <variable name="vp" public_interface="in" units="uM_per_sec"/>
         <variable initial_value="0.852" name="Vm_sgc" public_interface="out" units="uM_per_sec"/>
@@ -373,8 +381,10 @@ var k_mlcpm: uM {pub: in};-->
         <variable initial_value="0.0086" name="k_mlcpb" public_interface="out" units="per_sec"/>
         <!--init: 0.0086, -->
         <variable initial_value="0.5" name="k_mlcpc" public_interface="out" units="per_sec"/>
+        <!--0.5-->
         <!--init: 0.0327-->
         <variable initial_value="5.5" name="k_mlcpm" public_interface="out" units="uM"/>
+        <!--5.5-->
         <variable initial_value="2" name="n_mlcph" public_interface="out" units="dimensionless"/>
         <!--     var k2y: per_sec {pub: in};-->
         <!-- k2y=k_mlcp in Yang et al. (2005)-->
@@ -410,7 +420,8 @@ var k_mlcpm: uM {pub: in};-->
         <variable name="kon1" public_interface="in" units="dimensionless"/>
         <variable name="kon2" public_interface="in" units="uM"/>
         <variable name="koff1" public_interface="in" units="per_sec"/>
-        <variable name="koff2" public_interface="in" units="per_sec"/>
+        <variable name="tau" public_interface="in" units="dimensionless"/>
+        <!--/  var koff2: per_sec {pub: in};-->
         <variable name="tp" public_interface="in" units="second"/>
         <variable initial_value="1" name="mm" units="dimensionless"/>
         <variable name="k2i" public_interface="out" units="per_sec"/>
@@ -429,6 +440,9 @@ var k_mlcpm: uM {pub: in};-->
                     <ci>mm</ci>
                 </apply>
             </apply>
+            <!-- k2  = k2h/(mm)+k2y*tau*mm;
+I understood, I can formulate the relaxing effect of NO/WSS on stress,
+ when I reduce(1/mm) k2h effect as much as I increase(*mm, when mm>=10) the effect of k2y on k2.-->
             <apply>
                 <eq/>
                 <ci>k2i</ci>
@@ -535,6 +549,7 @@ var k_mlcpm: uM {pub: in};-->
     </component>
     <component name="AM">
         <variable initial_value="0" name="AM" public_interface="out" units="dimensionless"/>
+        <!--/////////////////////AM-->
         <variable name="AMp" public_interface="in" units="dimensionless"/>
         <variable name="k5" public_interface="in" units="first_order_rate_constant"/>
         <variable name="k6" public_interface="in" units="first_order_rate_constant"/>
@@ -574,6 +589,7 @@ var k_mlcpm: uM {pub: in};-->
         <variable name="M" public_interface="in" units="dimensionless"/>
         <variable name="AM" public_interface="in" units="dimensionless"/>
         <variable name="AMp" public_interface="out" units="dimensionless"/>
+        <!--/////////////////AMp-->
         <variable name="Mp" public_interface="in" units="dimensionless"/>
         <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
@@ -1482,7 +1498,7 @@ var k_mlcpm: uM {pub: in};-->
         <!--init:0.0003
 var k7: first_order_rate_constant {pub: out};-->
         <!--init: 0.03,-->
-        <variable initial_value="2" name="kca" public_interface="out" units="dimensionless"/>
+        <!--/var kca: dimensionless {init: 2, pub: out};-->
         <variable name="time" public_interface="in" units="second"/>
         <variable name="P" public_interface="in" units="dimensionless"/>
         <variable name="k1i" public_interface="in" units="first_order_rate_constant"/>
@@ -1534,8 +1550,9 @@ var k7: first_order_rate_constant {pub: out};-->
         <variable name="B_tot" public_interface="in" units="uM"/>
         <variable name="beta" public_interface="in" units="dimensionless"/>
         <variable name="Ca_c" public_interface="in" units="uM"/>
+        <!--/   var Ca_c00: uM {pub: in};-->
         <variable name="Ca_c0" public_interface="in" units="uM"/>
-        <variable name="Ca_c1" public_interface="in" units="uM"/>
+        <!--/ var Ca_c1: uM {pub: in};-->
         <variable name="Ca_b" public_interface="in" units="uM"/>
         <variable name="Ca_e" public_interface="in" units="uM"/>
         <variable name="Ca_s0" public_interface="in" units="uM"/>
@@ -1576,7 +1593,7 @@ var k7: first_order_rate_constant {pub: out};-->
         <variable name="k_eAKT_positive" public_interface="in" units="per_sec"/>
         <variable name="k_half_CaM" public_interface="in" units="uM"/>
         <variable name="k_leak" public_interface="in" units="per_uM_per_sec"/>
-        <variable name="k_mNO" public_interface="in" units="uM"/>
+        <!--/    var k_mNO: uM {pub: in};-->
         <variable name="k_off" public_interface="in" units="per_sec"/>
         <variable name="k_on" public_interface="in" units="per_uM_per_sec"/>
         <variable name="k_out" public_interface="in" units="uM_per_sec"/>
@@ -1666,7 +1683,7 @@ var k7: first_order_rate_constant {pub: out};-->
     <connection>
         <map_components component_1="asm_ca" component_2="calcium"/>
         <map_variables variable_1="Ca_in_SMC" variable_2="Ca_in_SMC"/>
-        <map_variables variable_1="p_agonist" variable_2="p_agonist"/>
+        <!--/    vars p_agonist and p_agonist;-->
         <map_variables variable_1="Ca_in_SMC_dig" variable_2="Ca_in_SMC_dig"/>
         <!--vars Ca_in_SMC2 and Ca_in_SMC2;-->
     </connection>
@@ -1678,7 +1695,7 @@ var k7: first_order_rate_constant {pub: out};-->
         <map_variables variable_1="Ca_SR" variable_2="Ca_SR"/>
         <map_variables variable_1="Ca_SR0" variable_2="Ca_SR0"/>
         <map_variables variable_1="Ca_t" variable_2="Ca_t"/>
-        <map_variables variable_1="p_agonist" variable_2="p_agonist"/>
+        <!--/   vars p_agonist and p_agonist;-->
         <map_variables variable_1="J_release" variable_2="J_release"/>
         <map_variables variable_1="rate1" variable_2="rate1"/>
         <map_variables variable_1="rate_SR" variable_2="rate_SR"/>
@@ -1689,7 +1706,7 @@ var k7: first_order_rate_constant {pub: out};-->
         <map_variables variable_1="J_pm" variable_2="J_pm"/>
         <map_variables variable_1="m" variable_2="m"/>
         <map_variables variable_1="V_ca" variable_2="V_ca"/>
-        <map_variables variable_1="P_ipr" variable_2="P_ipr"/>
+        <!--/   vars P_ipr and P_ipr;-->
         <map_variables variable_1="P_RyR" variable_2="P_RyR"/>
         <map_variables variable_1="I_ca" variable_2="I_ca"/>
         <map_variables variable_1="V" variable_2="V"/>
@@ -1736,7 +1753,7 @@ var k7: first_order_rate_constant {pub: out};-->
         <map_variables variable_1="k_ryr3" variable_2="k_ryr3"/>
         <map_variables variable_1="delta_SMC" variable_2="delta_SMC"/>
         <map_variables variable_1="delta2" variable_2="delta2"/>
-        <map_variables variable_1="k_ipr" variable_2="k_ipr"/>
+        <!--/    vars k_ipr and k_ipr;-->
         <map_variables variable_1="k_RyR" variable_2="k_RyR"/>
         <map_variables variable_1="Vm" variable_2="Vm"/>
         <map_variables variable_1="km" variable_2="km"/>
@@ -1746,7 +1763,7 @@ var k7: first_order_rate_constant {pub: out};-->
         <map_variables variable_1="T" variable_2="T"/>
         <map_variables variable_1="alpha0" variable_2="alpha0"/>
         <map_variables variable_1="alpha1" variable_2="alpha1"/>
-        <map_variables variable_1="alpha2" variable_2="alpha2"/>
+        <!--/  vars alpha2 and alpha2;-->
         <map_variables variable_1="Jer" variable_2="Jer"/>
         <map_variables variable_1="Ve" variable_2="Ve"/>
         <map_variables variable_1="Ke" variable_2="Ke"/>
@@ -1792,7 +1809,7 @@ var k7: first_order_rate_constant {pub: out};-->
         <map_variables variable_1="kon2" variable_2="kon2"/>
         <map_variables variable_1="koff" variable_2="koff"/>
         <map_variables variable_1="koff1" variable_2="koff1"/>
-        <map_variables variable_1="koff2" variable_2="koff2"/>
+        <!--/     vars koff2 and koff2;-->
         <map_variables variable_1="tp" variable_2="tp"/>
         <map_variables variable_1="k2hi" variable_2="k2hi"/>
     </connection>
@@ -1988,7 +2005,8 @@ var k7: first_order_rate_constant {pub: out};-->
         <map_components component_1="Calcium_signalling" component_2="EC_par"/>
         <map_variables variable_1="cc" variable_2="cc"/>
         <map_variables variable_1="Ca_c0" variable_2="Ca_c0"/>
-        <map_variables variable_1="Ca_c1" variable_2="Ca_c1"/>
+        <!--/       vars Ca_c1 and Ca_c1;
+/       vars Ca_c00 and Ca_c00;-->
         <map_variables variable_1="Ca_c" variable_2="Ca_c"/>
         <map_variables variable_1="Ca_b" variable_2="Ca_b"/>
         <map_variables variable_1="Ca_s" variable_2="Ca_s"/>
@@ -2068,7 +2086,7 @@ var k7: first_order_rate_constant {pub: out};-->
         <map_variables variable_1="NO_EC0" variable_2="NO_EC0"/>
         <map_variables variable_1="Q_NO" variable_2="Q_NO"/>
         <!--vars O2 and O2;-->
-        <map_variables variable_1="k_mNO" variable_2="k_mNO"/>
+        <!--/   vars k_mNO and k_mNO;-->
         <map_variables variable_1="eNOS_CaM" variable_2="eNOS_CaM"/>
         <map_variables variable_1="eNOS_CaM_star" variable_2="eNOS_CaM_star"/>
         <map_variables variable_1="Phi" variable_2="Phi"/>
@@ -2216,8 +2234,8 @@ var k7: first_order_rate_constant {pub: out};-->
         <map_variables variable_1="T" variable_2="T"/>
         <map_variables variable_1="alpha0" variable_2="alpha0"/>
         <map_variables variable_1="alpha1" variable_2="alpha1"/>
-        <map_variables variable_1="alpha2" variable_2="alpha2"/>
-        <map_variables variable_1="k_ipr" variable_2="k_ipr"/>
+        <!--/     vars alpha2 and alpha2;
+/  vars k_ipr and k_ipr;-->
         <map_variables variable_1="k_RyR" variable_2="k_RyR"/>
         <map_variables variable_1="Jer" variable_2="Jer"/>
         <map_variables variable_1="k_ryr0" variable_2="k_ryr0"/>
@@ -2232,5 +2250,9 @@ var k7: first_order_rate_constant {pub: out};-->
         <map_variables variable_1="Vm" variable_2="Vm"/>
         <map_variables variable_1="km" variable_2="km"/>
     </connection>
-    <!--End of SMC_calcium_file_$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$    -->
+    <!--End of SMC_calcium_file_$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+    <connection>
+        <map_components component_1="Environment" component_2="kay2"/>
+        <map_variables variable_1="tau" variable_2="tau"/>
+    </connection>
 </model>

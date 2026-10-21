@@ -181,11 +181,12 @@
     </component>
     <component name="Calcium_signalling">
         <variable name="time" public_interface="in" units="second"/>
+        <!--/ var Ca_c0: uM {pub: out};-->
         <variable initial_value="0.1" name="Ca_c0" public_interface="out" units="uM"/>
         <variable initial_value="0.1" name="Ca_c1" public_interface="out" units="uM"/>
-        <variable name="Ca_c" public_interface="out" units="uM"/>
+        <variable initial_value="Ca_c0" name="Ca_c" public_interface="out" units="uM"/>
         <variable initial_value="3.8605" name="Ca_b" public_interface="out" units="uM"/>
-        <variable initial_value="2823.7" name="Ca_s" public_interface="out" units="uM"/>
+        <variable initial_value="Ca_s0" name="Ca_s" public_interface="out" units="uM"/>
         <variable name="q_rel" public_interface="out" units="uM_per_sec"/>
         <variable name="q_res" public_interface="out" units="uM_per_sec"/>
         <variable name="q_out" public_interface="out" units="uM_per_sec"/>
@@ -208,7 +209,8 @@
         <variable initial_value="28.6" name="Z" public_interface="out" units="dimensionless"/>
         <variable initial_value="0.14" name="W_0" public_interface="out" units="dimensionless"/>
         <variable initial_value="8e-07" name="k_CCE" public_interface="out" units="per_sec"/>
-        <variable initial_value="2828" name="Ca_s0" public_interface="out" units="uM"/>
+        <variable initial_value="2823.7" name="Ca_s0" public_interface="out" units="uM"/>
+        <!--init:2828-->
         <variable initial_value="1500" name="Ca_e" public_interface="out" units="uM"/>
         <variable name="psi" public_interface="out" units="per_uM"/>
         <variable initial_value="0.0075" name="xi" public_interface="out" units="per_uM2"/>
@@ -225,7 +227,7 @@
                     <bvar>
                         <ci>time</ci>
                     </bvar>
-                    <ci>Ca_c0</ci>
+                    <ci>Ca_c</ci>
                 </apply>
                 <apply>
                     <plus/>
@@ -256,7 +258,7 @@
                         <apply>
                             <times/>
                             <ci>k_on</ci>
-                            <ci>Ca_c0</ci>
+                            <ci>Ca_c</ci>
                             <apply>
                                 <minus/>
                                 <ci>B_tot</ci>
@@ -271,23 +273,12 @@
                     </apply>
                 </apply>
             </apply>
-            <apply>
-                <eq/>
-                <ci>Ca_c</ci>
-                <piecewise>
-                    <piece>
-                        <ci>Ca_c0</ci>
-                        <apply>
-                            <eq/>
-                            <ci>cc</ci>
-                            <cn cellml:units="dimensionless">1</cn>
-                        </apply>
-                    </piece>
-                    <otherwise>
-                        <ci>Ca_c1</ci>
-                    </otherwise>
-                </piecewise>
-            </apply>
+            <!--/    Ca_c0 = sel
+/        case cc == 1{dimensionless}:
+/            Ca_c00;
+/        otherwise:
+/            Ca_c1;
+/    endsel;-->
             <apply>
                 <eq/>
                 <apply>
@@ -973,7 +964,7 @@
         <variable initial_value="382" name="lambda_NO" public_interface="out" units="per_sec"/>
         <variable name="Q_NO" public_interface="out" units="uM_per_sec"/>
         <!--var O2: uM {init: 5, pub: out};-->
-        <variable initial_value="23.2" name="k_mNO" public_interface="out" units="uM"/>
+        <!--  var k_mNO: uM {init: 23.2, pub: out};-->
         <variable name="eNOS_CaM" public_interface="in" units="uM"/>
         <variable name="eNOS_CaM_star" public_interface="in" units="uM"/>
         <variable initial_value="9" name="Phi" public_interface="out" units="dimensionless"/>

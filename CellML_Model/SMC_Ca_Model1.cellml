@@ -19,7 +19,7 @@
         <!--init: 21.21932599  // 0.5-->
         <variable initial_value="38" name="k_ryr3" public_interface="out" units="uM"/>
         <!--init: 38.31557078  // 38-->
-        <variable initial_value="5.55" name="k_ipr" public_interface="out" units="per_sec"/>
+        <!--/var k_ipr: per_sec {init: 5.55, pub: out};-->
         <variable initial_value="5" name="k_RyR" public_interface="out" units="per_sec"/>
         <!--init: 4.569088024  // 5.0-->
         <variable initial_value="-50" name="Vm" public_interface="out" units="mV"/>
@@ -37,7 +37,7 @@ init: 30.90642505   // 16-->
         <!--init: 0.056711214 // 0.05-->
         <variable initial_value="1" name="alpha1" public_interface="out" units="dimensionless"/>
         <!--init: 0.210342121   // init: 0.25-->
-        <variable initial_value="1" name="alpha2" public_interface="out" units="per_sec"/>
+        <!--/var alpha2: per_sec {init: 1, pub: out};-->
         <variable initial_value="0.1" name="Jer" public_interface="out" units="per_sec"/>
         <!--init: 0.498035613   // 0.1-->
         <variable initial_value="4.5" name="Ve" public_interface="out" units="uM_per_sec"/>
@@ -51,14 +51,16 @@ init: 30.90642505   // 16-->
  0.4-->
         <variable initial_value="5.5" name="gamma" public_interface="out" units="dimensionless"/>
         <!--init: 6.301286174 // 5.5-->
-        <variable initial_value="0.01" name="delta_SMC" public_interface="out" units="dimensionless"/>
-        <!--init: 0.01 //init: 0.051261883  // 0.05* -->
-        <variable initial_value="0.1" name="delta2" public_interface="out" units="dimensionless"/>
+        <variable initial_value="1" name="delta_SMC" public_interface="out" units="dimensionless"/>
+        <!--/0.05 //init: 0.01 //init: 0.051261883  // 0.05* -->
+        <variable initial_value="1" name="delta2" public_interface="out" units="dimensionless"/>
+        <!--/ 0.1-->
     </component>
     <component name="asm_ca">
         <variable name="time" public_interface="in" units="second"/>
-        <variable initial_value="0.123430830361543" name="Ca_in_SMC" public_interface="out" units="uM"/>
-        <variable initial_value="0.123430830361543" name="Ca_in_SMC0" public_interface="out" units="uM"/>
+        <variable initial_value="Ca_in_SMC0" name="Ca_in_SMC" public_interface="out" units="uM"/>
+        <variable initial_value="0.123430" name="Ca_in_SMC0" public_interface="out" units="uM"/>
+        <!--0.123430830361543-->
         <!--init:0.123074 //0.1348287//init: 0.167103-->
         <!-- var Ca_in_SMC0: uM {init: 0.161386, pub: out};-->
         <!--var Ca_in_SMC0: uM {init: 0.1887, pub: out};  //init: 0.241395024 // 0.116477*-->
@@ -69,7 +71,8 @@ init: 30.90642505   // 16-->
         <variable name="Cai_exp0" units="uM"/>
         <variable name="Cai_exp1" units="uM"/>
         <variable name="Cai_exp2" units="uM"/>
-        <variable initial_value="0.123430830361543" name="Cai0" units="uM"/>
+        <variable initial_value="0.123430" name="Cai0" units="uM"/>
+        <!--0.123430830361543-->
         <variable name="J_release" public_interface="out" units="uM_per_sec"/>
         <variable name="J_releaseD" units="uM_per_sec"/>
         <variable name="J_serca" public_interface="out" units="uM_per_sec"/>
@@ -78,15 +81,16 @@ init: 30.90642505   // 16-->
         <variable name="J_sercaD" units="uM_per_sec"/>
         <variable name="J_in" public_interface="out" units="uM_per_sec"/>
         <variable name="J_pm" public_interface="out" units="uM_per_sec"/>
-        <variable name="k_ipr" public_interface="in" units="per_sec"/>
-        <variable name="P_ipr" public_interface="out" units="dimensionless"/>
+        <!--/ var k_ipr: per_sec {pub: in};
+/  var P_ipr: dimensionless {pub: out};-->
         <variable name="k_RyR" public_interface="in" units="per_sec"/>
         <variable name="P_RyR" public_interface="out" units="dimensionless"/>
         <variable name="Jer" public_interface="in" units="per_sec"/>
-        <variable initial_value="24.9340818873636" name="Ca_SR" public_interface="out" units="uM"/>
-        <variable initial_value="24.9340818873636" name="Ca_SR0" public_interface="out" units="uM"/>
+        <variable initial_value="Ca_SR0" name="Ca_SR" public_interface="out" units="uM"/>
+        <variable initial_value="24.934082" name="Ca_SR0" public_interface="out" units="uM"/>
+        <!--24.9340818873636-->
         <!--init: 24.9340   //init: 14.5558862225983 //14.5558862225983  //10.04396733, // 27.5-->
-        <variable initial_value="0" name="p_agonist" public_interface="out" units="uM"/>
+        <!-- var p_agonist: uM {init: 0, pub: out};-->
         <variable name="k_ryr0" public_interface="in" units="dimensionless"/>
         <variable name="k_ryr1" public_interface="in" units="dimensionless"/>
         <variable name="k_ryr2" public_interface="in" units="uM"/>
@@ -97,10 +101,10 @@ init: 30.90642505   // 16-->
         <variable name="Kp" public_interface="in" units="uM"/>
         <variable name="alpha0" public_interface="in" units="uM_per_sec"/>
         <variable name="alpha1" public_interface="in" units="dimensionless"/>
-        <variable name="alpha2" public_interface="in" units="per_sec"/>
+        <!--/    var alpha2: per_sec {pub: in};-->
         <variable name="F" public_interface="in" units="C_per_mol"/>
-        <variable initial_value="0.459" name="y" public_interface="out" units="dimensionless"/>
-        <variable initial_value="0.459" name="y0" public_interface="out" units="dimensionless"/>
+        <variable initial_value="y0" name="y" public_interface="out" units="dimensionless"/>
+        <variable initial_value="0.4598" name="y0" public_interface="out" units="dimensionless"/>
         <!-- init:0.48 //init: 0.53-->
         <!--var y0: dimensionless {init: 0.38, pub: out}; //init: 0.624736368 // 0.38-->
         <variable name="phi1" public_interface="out" units="per_sec"/>
@@ -146,7 +150,7 @@ init: 30.90642505   // 16-->
         <!--init: 2100  //init: 2002-->
         <variable initial_value="2060" name="t3_KCL" public_interface="out" units="second"/>
         <variable initial_value="0" name="t1_E" public_interface="out" units="second"/>
-        <variable initial_value="3000" name="t2_E" public_interface="out" units="second"/>
+        <variable initial_value="10000" name="t2_E" public_interface="out" units="second"/>
         <variable initial_value="-30" name="V1" public_interface="out" units="mV"/>
         <!--init: -39.8881623-->
         <variable initial_value="2" name="ne" public_interface="out" units="dimensionless"/>
@@ -174,22 +178,23 @@ init: 30.90642505   // 16-->
         <variable name="J_inD" units="uM_per_sec"/>
         <variable name="J_inD0" units="uM_per_sec"/>
         <variable name="J_inD1" units="uM_per_sec"/>
-        <variable name="J_inD2" units="uM_per_sec"/>
+        <!--/ var J_inD2: uM_per_sec;-->
         <variable name="J_pmD" units="uM_per_sec"/>
         <variable name="J_in0" units="uM_per_sec"/>
         <variable name="J_in1" units="uM_per_sec"/>
-        <variable name="J_in2" units="uM_per_sec"/>
+        <!--/ var J_in2: uM_per_sec;-->
         <variable name="J_pmDN" units="uM_per_sec"/>
         <variable name="J_pmN" units="uM_per_sec"/>
         <variable initial_value="0" name="J_L_typeD" units="uM_per_sec"/>
         <variable name="h_inf" units="dimensionless"/>
-        <variable initial_value="0.762541971656097" name="h" units="dimensionless"/>
-        <variable initial_value="0.762541971656097" name="h0" units="dimensionless"/>
+        <variable initial_value="h0" name="h" units="dimensionless"/>
+        <variable initial_value="0.762542" name="h0" units="dimensionless"/>
+        <!--0.762541971656097-->
         <!--init: 0.7614 //init: 0.8909  //init: 0.49536-->
         <variable initial_value="-39" name="Vh" units="mV"/>
         <!--init: -50-->
         <variable initial_value="-40" name="Vt" units="mV"/>
-        <variable initial_value="1.2" name="out" units="dimensionless"/>
+        <!--/var out: dimensionless {init: 1.2};-->
         <!--** extra-->
         <variable initial_value="18" name="kh" units="mV"/>
         <!--init: 20-->
@@ -665,17 +670,7 @@ Activation gate ODE1 .... Ends..................................................
                     </apply>
                 </apply>
             </apply>
-            <apply>
-                <eq/>
-                <ci>J_inD2</ci>
-                <apply>
-                    <times/>
-                    <ci>delta_SMC</ci>
-                    <ci>n_in</ci>
-                    <ci>alpha2</ci>
-                    <ci>p_agonist</ci>
-                </apply>
-            </apply>
+            <!--/J_inD2    = delta_SMC*n_in*alpha2*p_agonist;-->
             <apply>
                 <eq/>
                 <ci>J_in0</ci>
@@ -706,16 +701,7 @@ Activation gate ODE1 .... Ends..................................................
                     </apply>
                 </apply>
             </apply>
-            <apply>
-                <eq/>
-                <ci>J_in2</ci>
-                <apply>
-                    <times/>
-                    <ci>n_in</ci>
-                    <ci>alpha2</ci>
-                    <ci>p_agonist</ci>
-                </apply>
-            </apply>
+            <!--/J_in2     = n_in*alpha2*p_agonist;-->
             <apply>
                 <eq/>
                 <ci>J_serca</ci>
@@ -787,11 +773,6 @@ Activation gate ODE1 .... Ends..................................................
                         <plus/>
                         <apply>
                             <times/>
-                            <ci>k_ipr</ci>
-                            <ci>P_ipr</ci>
-                        </apply>
-                        <apply>
-                            <times/>
                             <ci>k_RyR</ci>
                             <ci>P_RyR</ci>
                         </apply>
@@ -804,6 +785,7 @@ Activation gate ODE1 .... Ends..................................................
                     </apply>
                 </apply>
             </apply>
+            <!--/     J_release  = n_release*(k_ipr*P_ipr+k_RyR*P_RyR+Jer)*(Ca_SR-Ca_in_SMC);-->
             <apply>
                 <eq/>
                 <ci>J_releaseD</ci>
@@ -820,68 +802,28 @@ Activation gate ODE1 .... Ends..................................................
                     <times/>
                     <ci>n_in</ci>
                     <apply>
-                        <plus/>
+                        <minus/>
+                        <ci>alpha0</ci>
                         <apply>
-                            <minus/>
-                            <ci>alpha0</ci>
+                            <divide/>
                             <apply>
-                                <divide/>
-                                <apply>
-                                    <times/>
-                                    <ci>alpha1</ci>
-                                    <ci>I_ca</ci>
-                                </apply>
-                                <apply>
-                                    <times/>
-                                    <cn cellml:units="umol_per_cmsq">2</cn>
-                                    <ci>F</ci>
-                                </apply>
+                                <times/>
+                                <ci>alpha1</ci>
+                                <ci>I_ca</ci>
                             </apply>
-                        </apply>
-                        <apply>
-                            <times/>
-                            <ci>alpha2</ci>
-                            <ci>p_agonist</ci>
+                            <apply>
+                                <times/>
+                                <cn cellml:units="umol_per_cmsq">2</cn>
+                                <ci>F</ci>
+                            </apply>
                         </apply>
                     </apply>
                 </apply>
             </apply>
+            <!--/J_in       = n_in*(alpha0-alpha1*I_ca/(2{umol_per_cmsq}*F)+alpha2*p_agonist);-->
             <!--J_L_typeD = n_in*(alpha0-alpha1*gca*pow(m, nm)*V_Ca*1{M_per_cmsq}/(2{umol_per_cmsq}*F)+alpha2*p_agonist);-->
             <!--alpha0-alpha1*gca*0.622{dimesionless}*pow(m, nm)*V_ca*1{M_per_cmsq}/(2{umol_per_cmsq}*F));-->
-            <apply>
-                <eq/>
-                <ci>P_ipr</ci>
-                <apply>
-                    <power/>
-                    <apply>
-                        <divide/>
-                        <apply>
-                            <times/>
-                            <ci>p_agonist</ci>
-                            <ci>Ca_in_SMC</ci>
-                            <apply>
-                                <minus/>
-                                <cn cellml:units="dimensionless">1</cn>
-                                <ci>y</ci>
-                            </apply>
-                        </apply>
-                        <apply>
-                            <times/>
-                            <apply>
-                                <plus/>
-                                <ci>p_agonist</ci>
-                                <ci>L1</ci>
-                            </apply>
-                            <apply>
-                                <plus/>
-                                <ci>Ca_in_SMC</ci>
-                                <ci>L5</ci>
-                            </apply>
-                        </apply>
-                    </apply>
-                    <cn cellml:units="dimensionless">3</cn>
-                </apply>
-            </apply>
+            <!--/ P_ipr                = pow(p_agonist*Ca_in_SMC*(1{dimensionless}-y)/((p_agonist+L1)*(Ca_in_SMC+L5)), 3{dimensionless});-->
             <apply>
                 <eq/>
                 <ci>P_RyR</ci>
@@ -1012,60 +954,26 @@ Activation gate ODE1 .... Ends..................................................
                     <divide/>
                     <apply>
                         <times/>
-                        <apply>
-                            <plus/>
-                            <apply>
-                                <times/>
-                                <ci>l_m4</ci>
-                                <ci>L2</ci>
-                                <ci>L1</ci>
-                            </apply>
-                            <apply>
-                                <times/>
-                                <ci>l_m2</ci>
-                                <ci>L4</ci>
-                                <ci>p_agonist</ci>
-                            </apply>
-                        </apply>
+                        <ci>l_m4</ci>
+                        <ci>L2</ci>
+                        <ci>L1</ci>
                         <ci>Ca_in_SMC</ci>
                     </apply>
                     <apply>
                         <times/>
                         <ci>L4</ci>
                         <ci>L2</ci>
-                        <apply>
-                            <plus/>
-                            <ci>L1</ci>
-                            <ci>p_agonist</ci>
-                        </apply>
+                        <ci>L1</ci>
                     </apply>
                 </apply>
             </apply>
+            <!--/phi1                 = (l_m4*L2*L1+l_m2*L4*p_agonist)*Ca_in_SMC/(L4*L2*(L1+p_agonist));-->
             <apply>
                 <eq/>
                 <ci>phi2</ci>
-                <apply>
-                    <divide/>
-                    <apply>
-                        <plus/>
-                        <apply>
-                            <times/>
-                            <ci>l_m2</ci>
-                            <ci>p_agonist</ci>
-                        </apply>
-                        <apply>
-                            <times/>
-                            <ci>l_m4</ci>
-                            <ci>L3</ci>
-                        </apply>
-                    </apply>
-                    <apply>
-                        <plus/>
-                        <ci>L3</ci>
-                        <ci>p_agonist</ci>
-                    </apply>
-                </apply>
+                <ci>l_m4</ci>
             </apply>
+            <!--/phi2                 = (l_m2*p_agonist+l_m4*L3)/(L3+p_agonist);-->
             <apply>
                 <eq/>
                 <apply>
@@ -3160,28 +3068,30 @@ Activation gate ODE1 .... Ends..................................................
         <variable initial_value="10" name="k1a" public_interface="out" units="per_sec"/>
         <!--init: 0.5962-->
         <variable name="Ca_in_SMC" public_interface="in" units="uM"/>
-        <variable initial_value="0.05" name="Ca" units="uM"/>
+        <!--var Ca: uM {init: 0.05};-->
         <variable name="Ca_in_SMC_dig" public_interface="in" units="uM"/>
         <variable initial_value="0.7" name="k1b" public_interface="out" units="uM"/>
         <!--it was var k1b: uM {init: 0.41, pub: out};
 k1b was 0.7-->
         <variable initial_value="564.67" name="tp" public_interface="out" units="second"/>
-        <variable initial_value="0" name="P" public_interface="out" units="dimensionless"/>
-        <variable initial_value="0" name="P0" units="dimensionless"/>
+        <variable initial_value="P0" name="P" public_interface="out" units="dimensionless"/>
+        <variable initial_value="0.5660" name="P0" units="dimensionless"/>
+        <!--init: 0-->
         <!--init: 0.5660310-->
         <!--0.5822 // init:0.001-->
         <variable name="kon" public_interface="out" units="dimensionless"/>
         <variable name="koff" public_interface="out" units="per_sec"/>
         <variable initial_value="76.23" name="k2b" public_interface="out" units="per_sec"/>
+        <!--76.23-->
         <!--        var k2b: per_sec {init: 76.23, pub: out};-->
         <variable initial_value="0.000125" name="kon1" public_interface="out" units="dimensionless"/>
-        <variable initial_value="0.1" name="kon2" public_interface="out" units="uM"/>
+        <variable initial_value="0.000174" name="kon2" public_interface="out" units="uM"/>
+        <!--0.1-->
         <!-- kon2 was 0.000174-->
         <variable initial_value="0.4629" name="koff1" public_interface="out" units="per_sec"/>
         <!--init: 0.4629-->
-        <variable initial_value="120.84" name="koff2" public_interface="out" units="per_sec"/>
-        <!-- koff2 was 120.84?!-->
-        <variable name="p_agonist" public_interface="in" units="uM"/>
+        <!--var koff2: per_sec {init: 120.84, pub: out};  // koff2 was 120.84?!-->
+        <!--var p_agonist: uM {pub: in};-->
         <!--  var Ca_in_SMC2: uM {pub: in};
 kon = kon1+sqr(Ca)/(sqr(kon2)+sqr(Ca));-->
         <variable initial_value="4" name="n1" units="dimensionless"/>
@@ -3227,24 +3137,9 @@ kon = kon1+sqr(Ca)/(sqr(kon2)+sqr(Ca));-->
             <apply>
                 <eq/>
                 <ci>koff</ci>
-                <apply>
-                    <plus/>
-                    <ci>koff1</ci>
-                    <apply>
-                        <divide/>
-                        <apply>
-                            <times/>
-                            <ci>koff2</ci>
-                            <ci>p_agonist</ci>
-                        </apply>
-                        <apply>
-                            <plus/>
-                            <cn cellml:units="uM">1</cn>
-                            <ci>p_agonist</ci>
-                        </apply>
-                    </apply>
-                </apply>
+                <ci>koff1</ci>
             </apply>
+            <!--    koff         = koff1+koff2*p_agonist/(1{uM}+p_agonist);-->
             <apply>
                 <eq/>
                 <apply>
