@@ -23,10 +23,10 @@ class ArteryCellMLRunner:
         self.sim_time = sim_time
         self.pre_time = pre_time
         # Use the same OpenCOR solver settings as the working calibration model
-        solver_info = {'MaximumStep': 0.1,'MaximumNumberOfSteps': 5000}
+     #   solver_info = {'MaximumStep': 0.1,'MaximumNumberOfSteps': 5000}
 
         # Create the OpenCOR simulation object using my existing opencor_helper.py
-        self.sim_object = SimulationHelper(model_path,dt, sim_time, solver_info={'MaximumNumberOfSteps': 100000,'MaximumStep': 0.0001}, pre_time=pre_time)
+        self.sim_object = SimulationHelper(model_path,dt, sim_time, solver_info={'MaximumNumberOfSteps': 10000,'MaximumStep': 0.1}, pre_time=pre_time)
     
     def run_cellml(self):
 
